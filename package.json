@@ -1,0 +1,16 @@
+{
+  "name": "relay-web-proxy",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A small, security-conscious web proxy MVP for authorized use.",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0",
+    "express": "^5.1.0",
+    "undici": "^7.29.1"
+  }
+}

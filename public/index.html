@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A lightweight web relay for authorized browsing and testing.">
+  <title>Relay Proxy</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="Relay Proxy home"><span class="brand-mark">R</span> relay</a>
+      <span class="status"><i></i> local instance</span>
+    </header>
+
+    <section class="hero">
+      <p class="eyebrow">Private browsing lab</p>
+      <h1>A clearer route<br><em>to the open web.</em></h1>
+      <p class="lede">Fetch and inspect public pages through your own small relay. Built for development, testing, and authorized use.</p>
+
+      <form class="proxy-form" action="/proxy" method="get">
+        <label for="url">Destination URL</label>
+        <div class="input-row">
+          <input id="url" name="url" type="text" placeholder="youtube.com" autocomplete="url" required>
+          <button type="submit">Open <span aria-hidden="true">↗</span></button>
+        </div>
+      </form>
+
+      <script>
+        document.querySelector('.proxy-form').addEventListener('submit', (event) => {
+          const input = document.querySelector('#url');
+          const value = input.value.trim();
+          if (!/^[a-z][a-z\d+.-]*:\/\//i.test(value)) input.value = `https://${value}`;
+        });
+      </script>
+
+      <p class="note"><span>i</span> Public HTTP and HTTPS targets only. Local and private networks are blocked.</p>
+    </section>
+
+    <section class="lower-grid" aria-label="Proxy details">
+      <article><span class="number">01</span><h2>One small server</h2><p>Simple URL fetching with HTML links and assets routed back through your relay.</p></article>
+      <article><span class="number">02</span><h2>Guarded by default</h2><p>Redirects are rechecked, private IP ranges are blocked, and requests are rate limited.</p></article>
+      <article><span class="number">03</span><h2>Yours to extend</h2><p>Add authentication, sessions, CSS rewriting, or a persistent cache as your use case grows.</p></article>
+    </section>
+
+    <footer>Relay Proxy <span>·</span> authorized use only</footer>
+  </main>
+</body>
+</html>

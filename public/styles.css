@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+:root { --ink: #17211b; --muted: #66736a; --paper: #f5f3ed; --mint: #cde8c8; --line: #d4d8ce; --accent: #e05b3f; }
+* { box-sizing: border-box; }
+body { margin: 0; min-height: 100vh; color: var(--ink); background: var(--paper); font-family: 'Space Grotesk', sans-serif; }
+body:before { content: ''; position: fixed; inset: 0; pointer-events: none; opacity: .3; background-image: linear-gradient(rgba(23,33,27,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(23,33,27,.04) 1px, transparent 1px); background-size: 42px 42px; mask-image: linear-gradient(to bottom, black, transparent 72%); }
+.shell { width: min(1120px, calc(100% - 48px)); margin: auto; position: relative; }
+.topbar { height: 92px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--line); }
+.brand { color: var(--ink); text-decoration: none; text-transform: lowercase; font-weight: 700; letter-spacing: -.03em; font-size: 1.25rem; display: flex; align-items: center; gap: 10px; }
+.brand-mark { display: grid; place-items: center; width: 28px; height: 28px; color: var(--paper); background: var(--ink); border-radius: 50%; font-family: 'DM Mono', monospace; font-size: .85rem; }
+.status, .eyebrow, .note, footer { font: 500 .69rem 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .08em; }
+.status { color: var(--muted); } .status i { display: inline-block; width: 7px; height: 7px; background: #61a653; border-radius: 50%; margin-right: 7px; }
+.hero { max-width: 780px; padding: 112px 0 92px; }
+.eyebrow { color: var(--accent); margin: 0 0 22px; } h1 { font-size: clamp(3.8rem, 8vw, 7.5rem); line-height: .88; letter-spacing: -.08em; margin: 0; font-weight: 600; } h1 em { color: var(--accent); font-style: normal; }
+.lede { max-width: 490px; color: var(--muted); font-size: 1.07rem; line-height: 1.55; margin: 38px 0 50px; }
+.proxy-form label { display: block; font: 500 .69rem 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 10px; }
+.input-row { display: flex; max-width: 720px; border-bottom: 2px solid var(--ink); } input { min-width: 0; flex: 1; border: 0; background: transparent; color: var(--ink); padding: 16px 0; outline: 0; font: 1.15rem 'DM Mono', monospace; } input::placeholder { color: #9da69d; } button { border: 0; background: var(--ink); color: var(--paper); padding: 0 25px; font: 600 .95rem 'Space Grotesk', sans-serif; cursor: pointer; } button:hover { background: var(--accent); }
+.note { color: var(--muted); margin-top: 18px; text-transform: none; letter-spacing: 0; } .note span { border: 1px solid var(--muted); border-radius: 50%; display: inline-grid; place-items: center; width: 16px; height: 16px; margin-right: 6px; font-size: .6rem; }
+.lower-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; border-top: 1px solid var(--line); padding: 30px 0 90px; } article { min-height: 150px; border-left: 2px solid var(--mint); padding-left: 18px; } .number { color: var(--accent); font: .72rem 'DM Mono', monospace; } h2 { font-size: 1.1rem; margin: 20px 0 10px; } article p { color: var(--muted); font-size: .9rem; line-height: 1.5; max-width: 250px; margin: 0; } footer { color: var(--muted); border-top: 1px solid var(--line); padding: 22px 0 35px; } footer span { color: var(--accent); padding: 0 8px; }
+@media (max-width: 680px) { .shell { width: min(100% - 32px, 1120px); } .topbar { height: 72px; } .hero { padding: 80px 0 70px; } h1 { font-size: clamp(3.25rem, 17vw, 6rem); } .lede { margin: 30px 0 40px; } .input-row { display: block; border: 0; } input { display: block; width: 100%; border-bottom: 2px solid var(--ink); padding: 15px 0; } button { width: 100%; margin-top: 12px; padding: 15px; } .lower-grid { grid-template-columns: 1fr; gap: 25px; padding-bottom: 60px; } article { min-height: auto; } }
