@@ -20,6 +20,8 @@ const requestCounts = new Map();
 const sessions = new Map();
 const clientOrigins = new Map();
 
+app.use(express.static("public"));
+
 // ---------------------------------------------------------
 // PRIVATE / INTERNAL NETWORK PROTECTION
 // ---------------------------------------------------------
@@ -1069,6 +1071,42 @@ async function readRequestBody(req) {
   return Buffer.concat(chunks);
 }
 
+async function readBoundedText(response, limit) {
+  if (!response.body) {
+    return "";
+  }
+
+  const reader = response.body.getReader();
+  const chunks = [];
+  let total = 0;
+
+  try {
+    for (;;) {
+      const { done, value } = await reader.read();
+
+      if (done) {
+        break;
+      }
+
+      total += value.byteLength;
+
+      if (total > limit) {
+        const error = new Error("The response is too large.");
+        error.statusCode = 413;
+        throw error;
+      }
+
+      chunks.push(value);
+    }
+  } finally {
+    reader.releaseLock?.();
+  }
+
+  return Buffer.concat(
+    chunks.map((chunk) => Buffer.from(chunk))
+  ).toString("utf-8");
+}
+
 // ---------------------------------------------------------
 // REDIRECT HANDLING
 // ---------------------------------------------------------
@@ -1660,11 +1698,15 @@ app.use(
 // START
 // ---------------------------------------------------------
 
-app.listen(
-  port,
-  () => {
-    console.log(
-      `Relay Proxy running at http://localhost:${port}`
-    );
-  }
-);
+export default app;
+
+if (!process.env.VERCEL) {
+  app.listen(
+    port,
+    () => {
+      console.log(
+        `Relay Proxy running at http://localhost:${port}`
+      );
+    }
+  );
+}
